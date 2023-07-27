@@ -1,6 +1,6 @@
 # startbit
 
-Blocks for Hiwonder startbit
+Blocks for Hichuxin dolphin
 ## License
 
 MIT
