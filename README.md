@@ -11,6 +11,6 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-startbit=github: dolphinchuxin/Hidolphin
+startbit=github:https://github.com/dolphinchuxin/Hidolphin
 ```
 
