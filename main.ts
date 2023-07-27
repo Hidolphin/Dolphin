@@ -1,10 +1,10 @@
 /*
- startbit package
+ dolphin package
 */
 //% weight=10 icon="\uf013" color=#2896ff
-namespace startbit {
+namespace dolphin {
 
-    export enum startbit_Colors {
+    export enum dolphin_Colors {
         //% block="Red"
         Red = 0x01,
         //% block="Green"
@@ -19,7 +19,7 @@ namespace startbit {
         None = 0x06
     }
 
-    export enum startbit_lineFollower {
+    export enum dolphin_lineFollower {
         //% blockId="S1_OUT_S2_OUT" block="Sensor1 and sensor2 are out black line"
         S1_OUT_S2_OUT = 0x00,
         //% blockId="S1_OUT_S2_IN" block="Sensor2 in black line but sensor1 not"
@@ -30,26 +30,26 @@ namespace startbit {
         S1_IN_S2_IN = 0x03
     }
 
-    export enum startbit_colorSensorPort {
+    export enum dolphin_colorSensorPort {
         //% block="Port 4"
         port4 = 0x04
     }
 
-    export enum startbit_Servos {
+    export enum dolphin_Servos {
         //% block="servo 1"
         Servo1 = 0x01,
         //% block="servo 2"
         Servo2 = 0x02
     }
 
-    export enum startbit_ultrasonicPort {
+    export enum dolphin_ultrasonicPort {
         //% block="Port 1"
         port1 = 0x01,
         //% block="Port 2"
         port2 = 0x02
     }
 
-    export enum startbit_touchKeyPort {
+    export enum dolphin_touchKeyPort {
         //% block="Port 1"
         port1 = 0x01,
         //% block="Port 2"
@@ -58,68 +58,68 @@ namespace startbit {
         port3 = 0x03
     }
 
-    export enum startbit_lineFollowPort {
+    export enum dolphin_lineFollowPort {
         //% block="Port 1"
         port1 = 0x01
     }
 
 
-    export enum startbit_PinIOStatus {
+    export enum dolphin_PinIOStatus {
         //% block="Low"
         Low = 0x00,
         //% block="High"
         Hight = 0x01
     }
 
-    export enum startbit_LineFollowerSensor {
+    export enum dolphin_LineFollowerSensor {
         //% block="Sensor 1"
         LFSensor_1 = 0x00,
         //% block="Sensor 2"
         LFSensor_2 = 0x01
     }
 
-    export enum startbit_busServoPort {
+    export enum dolphin_busServoPort {
         //% block="Port 6"
         port6 = 0x06
     }
 
-    export enum startbit_knobPort {
+    export enum dolphin_knobPort {
         //% block="Port 1"
         port1 = 0x01
     }
 	
-    export enum startbit_photosensitivePort {
+    export enum dolphin_photosensitivePort {
         //% block="Port 1"
         port1 = 0x01	    
     }
 	
-    export enum startbit_PhotosensitiveSensor {
+    export enum dolphin_PhotosensitiveSensor {
         //% block="Port 1"
         port1 = 0x00	    
     }
 
-    export enum startbit_fanPort {
+    export enum dolphin_fanPort {
         //% block="Port 1"
         port1,
         //% block="Port 2"
         port2
     }
 
-    export enum startbit_servorange {
+    export enum dolphin_servorange {
         //% block="180"
         range1 = 180,
         //% block="270"
         range2 =270
     }
 	
-    export enum startbit_digitaltubePort {
+    export enum dolphin_digitaltubePort {
         //% block="Port 1"
         port1 = 0x01,
         //% block="Port 2"
         port2 = 0x02
     }
 	
-    export enum startbit_CmdType {
+    export enum dolphin_CmdType {
         //% block="Invalid command"
         NO_COMMAND = 0,
         //% block="car run"
@@ -156,7 +156,7 @@ namespace startbit {
         GET_HAND_CMD = 15
      }
 
-    export enum startbit_CarRunCmdType {
+    export enum dolphin_CarRunCmdType {
         //% block="Stop"
         STOP = 0,
         //% block="Go ahead"
@@ -180,9 +180,9 @@ namespace startbit {
     /**
      * Startbit initialization, please execute at boot time
     */
-    //% weight=100 blockId=startbit_Init block="Initialize Dolphin"
-    export function startbit_Init() {
-        startbit_initRGBLight();
+    //% weight=100 blockId=dolphin_Init block="Initialize Dolphin"
+    export function dolphin_Init() {
+        dolphin_initRGBLight();
         serial.redirect(
             SerialPin.P12,
             SerialPin.P8,
@@ -216,7 +216,7 @@ namespace startbit {
     let macStr: string = "";
     let actiongroup_finished = true;
     
-    let Digitaltube:startbit_TM1640LEDs
+    let Digitaltube:dolphin_TM1640LEDs
     let TM1640_CMD1 = 0x40;
     let TM1640_CMD2 = 0xC0;
     let TM1640_CMD3 = 0x80;
@@ -395,7 +395,7 @@ namespace startbit {
     //% angle.min=0 angle.max=270
     //% inlineInputMode=inline
     //% subcategory=Servo
-    export function setServo(range:startbit_servorange, index: number = 1, angle: number, duration: number = 300) {
+    export function setServo(range:dolphin_servorange, index: number = 1, angle: number, duration: number = 300) {
 	    
         let position = mapRGB(angle, 0, range, 500, 2500);
 
@@ -418,9 +418,9 @@ namespace startbit {
     * Set the servo controller to run a actiongroup
     * @param times Running times. eg: 1
     */
-    //% weight=94 blockId=startbit_runActionGroup block="Run ActionGroup|index %index|times %times"
+    //% weight=94 blockId=dolphin_runActionGroup block="Run ActionGroup|index %index|times %times"
     //% subcategory=Servo
-    export function startbit_runActionGroup(index: number, times: number = 1) {
+    export function dolphin_runActionGroup(index: number, times: number = 1) {
 
         let buf = pins.createBuffer(7);
         buf[0] = 0x55;
@@ -438,9 +438,9 @@ namespace startbit {
     /**
     * Stop running actiongroup
     */
-    //% weight=92 blockId=startbit_stopnActionGroup block="Stop ActionGroup"
+    //% weight=92 blockId=dolphin_stopnActionGroup block="Stop ActionGroup"
     //% subcategory=Servo
-    export function startbit_stopActionGroup() {
+    export function dolphin_stopActionGroup() {
 
         let buf = pins.createBuffer(7);
         buf[0] = 0x55;
@@ -455,9 +455,9 @@ namespace startbit {
     /**
      * Wait for Actiongroup Finishing
      */
-    //% weight=93 blockId=startbit_actionRunover block="Action run over"
+    //% weight=93 blockId=dolphin_actionRunover block="Action run over"
     //% subcategory=Servo
-    export function startbit_actionRunover(): boolean {
+    export function dolphin_actionRunover(): boolean {
         // let ret = false;
         if (actiongroup_finished == true) {
             // ret = true;
@@ -471,11 +471,11 @@ namespace startbit {
 
 	
     /**
-     * Send read startbit servos angle command
+     * Send read dolphin servos angle command
      */
-    //% weight=99 blockId=startbit_readAngle block="Send |%servo|angle command "
+    //% weight=99 blockId=dolphin_readAngle block="Send |%servo|angle command "
     //% subcategory=Servo
-    export function startbit_readAngle(servo: startbit_Servos) {
+    export function dolphin_readAngle(servo: dolphin_Servos) {
         let buf = pins.createBuffer(6);
         buf[0] = 0x55;
         buf[1] = 0x55;
@@ -493,7 +493,7 @@ namespace startbit {
      */
     //% weight=97 blockId=onStartbit_getAngle blockGap=50 block="on Dolphin|%servo|get angle"
     //% subcategory=Servo
-    export function onStartbit_getAngle(servo: startbit_Servos, body: Action) {
+    export function onStartbit_getAngle(servo: dolphin_Servos, body: Action) {
         control.onEvent(MESSAGE_ANGLE, servo, body);
     }
 
@@ -503,11 +503,11 @@ namespace startbit {
      */
     //% weight=98 blockId=getServosAngle block="Get|%servo|angle(-120~120)"
     //% subcategory=Servo
-    export function getServosAngle(servo: startbit_Servos): number {
-        if (servo == startbit_Servos.Servo1) {
+    export function getServosAngle(servo: dolphin_Servos): number {
+        if (servo == dolphin_Servos.Servo1) {
             return servo1Angle;
         }
-        else if (servo == startbit_Servos.Servo2) {
+        else if (servo == dolphin_Servos.Servo2) {
             return servo2Angle;
         }
         else
@@ -519,9 +519,9 @@ namespace startbit {
      *  @param pitch eg: 0
      *  @param roll eg: 0
      */
-    //% weight=91 blockId=startbit_sendAttitude block="Send pitch|%pitch|and roll|%roll"
+    //% weight=91 blockId=dolphin_sendAttitude block="Send pitch|%pitch|and roll|%roll"
    /*
-    export function startbit_sendAttitude(pitch: number, roll: number) {
+    export function dolphin_sendAttitude(pitch: number, roll: number) {
         pitch < -90 ? -90 : pitch;
         pitch > 90 ? 90 : pitch;
         roll < -90 ? -90 : roll;
@@ -541,11 +541,11 @@ namespace startbit {
     /**
     *	Set the speed of the number 1 motor and number 2 motor, range of -100~100, that can control the tank to go advance or turn of.
     */
-    //% weight=96 blockId=startbit_setMotorSpeed  block="Set motor1 speed(-100~100)|%speed1|and motor2|speed %speed2"
+    //% weight=96 blockId=dolphin_setMotorSpeed  block="Set motor1 speed(-100~100)|%speed1|and motor2|speed %speed2"
     //% speed1.min=-100 speed1.max=100
     //% speed2.min=-100 speed2.max=100
     //% subcategory=Servo
-    export function startbit_setMotorSpeed(speed1: number, speed2: number) {
+    export function dolphin_setMotorSpeed(speed1: number, speed2: number) {
         if (speed1 > 100 || speed1 < -100 || speed2 > 100 || speed2 < -100) {
             return;
         }
@@ -564,17 +564,17 @@ namespace startbit {
     /**
     *	Set the speed of the fan, range of -100~100.
     */
-    //% weight=95 blockId=startbit_setFanSpeed  blockGap=50 block="Set |%port fan speed(-100~100)|%speed1"
+    //% weight=95 blockId=dolphin_setFanSpeed  blockGap=50 block="Set |%port fan speed(-100~100)|%speed1"
     //% speed1.min=-100 speed1.max=100
     //% subcategory=Servo
-    export function startbit_setFanSpeed(port: startbit_fanPort, speed1: number) {
+    export function dolphin_setFanSpeed(port: dolphin_fanPort, speed1: number) {
         if (speed1 > 100 || speed1 < -100) {
             return;
         }
         let pin1 = AnalogPin.P1;
         let pin2 = AnalogPin.P2;
 
-        if (port == startbit_fanPort.port2) {
+        if (port == dolphin_fanPort.port2) {
             pin1 = AnalogPin.P13;
             pin2 = AnalogPin.P14;
         }
@@ -596,25 +596,25 @@ namespace startbit {
     /**
     * Get the volume level detected by the sound sensor, range 0 to 255
     */
-    //% weight=94 blockId=startbit_getSoundVolume block="Sound volume"
+    //% weight=94 blockId=dolphin_getSoundVolume block="Sound volume"
     //% subcategory=Sensor
-    export function startbit_getSoundVolume(): number {
+    export function dolphin_getSoundVolume(): number {
         return volume;
     }
 
     /**
-     *  Get startbit current voltage,the unit is mV
+     *  Get dolphin current voltage,the unit is mV
     */
-    //% weight=93 blockGap=50 blockId=startbit_getBatVoltage block="Get dolphin current voltage (mV)"
+    //% weight=93 blockGap=50 blockId=dolphin_getBatVoltage block="Get dolphin current voltage (mV)"
     //% subcategory=Sensor
-    export function startbit_getBatVoltage(): number {
+    export function dolphin_getBatVoltage(): number {
         return currentVoltage;
     }
 	
     /**
         * TM1640 LED display
         */
-    export class startbit_TM1640LEDs {
+    export class dolphin_TM1640LEDs {
         buf: Buffer;
         clk: DigitalPin;
         dio: DigitalPin;
@@ -769,14 +769,14 @@ namespace startbit {
      * @param intensity the brightness of the LED, eg: 7
      * @param count the count of the LED, eg: 4
      */   
-    function startbit_TM1640create(port: startbit_digitaltubePort, intensity: number, count: number): startbit_TM1640LEDs {
-        let digitaltube = new startbit_TM1640LEDs();
+    function dolphin_TM1640create(port: dolphin_digitaltubePort, intensity: number, count: number): dolphin_TM1640LEDs {
+        let digitaltube = new dolphin_TM1640LEDs();
         switch (port) {
-            case startbit_digitaltubePort.port1:
+            case dolphin_digitaltubePort.port1:
                 digitaltube.clk = DigitalPin.P2;
                 digitaltube.dio = DigitalPin.P1;
                 break;
-            case startbit_digitaltubePort.port2:
+            case dolphin_digitaltubePort.port2:
                 digitaltube.clk = DigitalPin.P14;
                 digitaltube.dio = DigitalPin.P13;
                 break;
@@ -795,18 +795,18 @@ namespace startbit {
      * @param intensity the brightness of the LED, eg: 7
      * @param count the count of the LED, eg: 4
      */
-    //% weight=96 blockId=startbit_digitaltube block="digitaltube|%port|intensity %intensity|LED count %count"
-    export function startbit_digitaltube(port: startbit_digitaltubePort, intensity: number, count: number) {
-        Digitaltube = startbit_TM1640create(port, intensity, count);
+    //% weight=96 blockId=dolphin_digitaltube block="digitaltube|%port|intensity %intensity|LED count %count"
+    export function dolphin_digitaltube(port: dolphin_digitaltubePort, intensity: number, count: number) {
+        Digitaltube = dolphin_TM1640create(port, intensity, count);
     }
 
     /**
      * show a number. 
      * @param num is a number, eg: 0
      */
-    //% weight=91 blockId=startbit_showNumber block="digitaltube show number| %num"
+    //% weight=91 blockId=dolphin_showNumber block="digitaltube show number| %num"
     //% subcategory=LED
-    export function startbit_showNumber(num: number)  {
+    export function dolphin_showNumber(num: number)  {
         Digitaltube.showNumber(num);
     }
 
@@ -815,9 +815,9 @@ namespace startbit {
      * @param num number will show, eg: 5
      * @param bit the position of the LED, eg: 0
      */
-    //% weight=89 blockId=startbit_showbit block="digitaltube show digit| %num|at %bit"
+    //% weight=89 blockId=dolphin_showbit block="digitaltube show digit| %num|at %bit"
     //% subcategory=LED
-    export function startbit_showbit(num: number = 5, bit: number = 0) {
+    export function dolphin_showbit(num: number = 5, bit: number = 0) {
         Digitaltube.showbit(num, bit);
     }
 
@@ -825,9 +825,9 @@ namespace startbit {
      * show a hex number. 
      * @param num is a hex number, eg: 0
      */
-    //% weight=90 blockId=startbit_showhex block="digitaltube show hex number| %num"
+    //% weight=90 blockId=dolphin_showhex block="digitaltube show hex number| %num"
     //% subcategory=LED
-    export function startbit_showhex(num: number) {
+    export function dolphin_showhex(num: number) {
         Digitaltube.showHex(num);
     }
 
@@ -836,9 +836,9 @@ namespace startbit {
      * @param bit is the position, eg: 1
      * @param show is show/hide dp, eg: true
      */
-    //% weight=88 blockId=startbit_showDP block="digitaltube DotPoint at| %bit|show %show"
+    //% weight=88 blockId=dolphin_showDP block="digitaltube DotPoint at| %bit|show %show"
     //% subcategory=LED
-    export function startbit_showDP(bit: number = 1, show: boolean = true) {
+    export function dolphin_showDP(bit: number = 1, show: boolean = true) {
         Digitaltube.showDP(bit, show);
     } 
 
@@ -846,36 +846,36 @@ namespace startbit {
      * set TM1640 intensity, range is [0-8], 0 is off.
      * @param val the brightness of the TM1640, eg: 7
      */
-    //% weight=92 blockId=startbit_intensity block=" digitaltube set intensity %val"
+    //% weight=92 blockId=dolphin_intensity block=" digitaltube set intensity %val"
     //% subcategory=LED
-    export function startbit_intensity(val: number = 7) {
+    export function dolphin_intensity(val: number = 7) {
         Digitaltube.intensity(val);
     } 
 
     /**
      * turn off LED. 
      */
-    //% weight=86 blockId=startbit_off block="turn off digitaltube"
+    //% weight=86 blockId=dolphin_off block="turn off digitaltube"
     //% subcategory=LED
-    export function startbit_off() {
+    export function dolphin_off() {
         Digitaltube.off();
     }
 
     /**
      * turn on LED. 
      */
-    //% weight=87 blockId=startbit_on block="turn on digitaltube"
+    //% weight=87 blockId=dolphin_on block="turn on digitaltube"
     //% subcategory=LED
-    export function startbit_on() {
+    export function dolphin_on() {
         Digitaltube.on();
     }
 
     /**
      * clear LED. 
      */
-    //%weight=85 blockId=startbit_clear blockGap=50 block="clear digitaltube"
+    //%weight=85 blockId=dolphin_clear blockGap=50 block="clear digitaltube"
     //% subcategory=LED
-    export function startbit_clear() {
+    export function dolphin_clear() {
         Digitaltube.clear();
     }  
 
@@ -1112,8 +1112,8 @@ namespace startbit {
     /**
      * Initialize the color sensor,please execute at boot time
      */
-    //% weight=98 blockId=startbit_init_colorSensor block="Initialize color sensor port at %port"
-    export function startbit_init_colorSensor(port: startbit_colorSensorPort) {
+    //% weight=98 blockId=dolphin_init_colorSensor block="Initialize color sensor port at %port"
+    export function dolphin_init_colorSensor(port: dolphin_colorSensorPort) {
         InitColor();
         enableLightSensor(true);
         control.waitMicros(100);
@@ -1122,9 +1122,9 @@ namespace startbit {
     /**
 	 *  Color sensor return the color.
 	 */
-    //% weight=100 blockId=startbit_checkCurrentColor block="Current color %color"
+    //% weight=100 blockId=dolphin_checkCurrentColor block="Current color %color"
     //% subcategory=Sensor
-    export function startbit_checkCurrentColor(color: startbit_Colors): boolean {
+    export function dolphin_checkCurrentColor(color: dolphin_Colors): boolean {
         let c = i2cread(APDS9960_CDATAL) + i2cread(APDS9960_CDATAH) * 256;
         let r = i2cread(APDS9960_RDATAL) + i2cread(APDS9960_RDATAH) * 256;
         let g = i2cread(APDS9960_GDATAL) + i2cread(APDS9960_GDATAH) * 256;
@@ -1158,22 +1158,22 @@ namespace startbit {
          let hsv = rgb2hue(r, g, b);
         // serial.writeNumber(hsv);
         // serial.writeLine("->hsv");
-        let t = startbit_Colors.None;
+        let t = dolphin_Colors.None;
         if (c > 2200 && r > 65 && g > 65 && b > 65) {
-            t = startbit_Colors.White;
+            t = dolphin_Colors.White;
         }
         else if (c > 800) {
             if (hsv < 8 || hsv > 350)
-                t = startbit_Colors.Red;
+                t = dolphin_Colors.Red;
             else if (hsv > 60 && hsv < 170) {
-                t = startbit_Colors.Green;
+                t = dolphin_Colors.Green;
             }
             else if (hsv > 210 && hsv < 230) {
-                t = startbit_Colors.Blue;
+                t = dolphin_Colors.Blue;
             }
         }
         else if (c > 200 && r > 10 && g > 7 && b > 7 && r < 16.5 && g < 15 && b < 14) {
-            t = startbit_Colors.Black;
+            t = dolphin_Colors.Black;
         }
         return (color == t);
     }
@@ -1181,21 +1181,21 @@ namespace startbit {
     /**
     * Get the obstacle avoidance sensor status,1 detect obstacle,0 no detect obstacle
     */
-    //% weight=97 blockId=startbit_avoidSensor block="Obstacle avoidance sensor|port %port|detect obstacle"
+    //% weight=97 blockId=dolphin_avoidSensor block="Obstacle avoidance sensor|port %port|detect obstacle"
     //% subcategory=Sensor
-    export function startbit_avoidSensor(port: startbit_touchKeyPort): boolean {
+    export function dolphin_avoidSensor(port: dolphin_touchKeyPort): boolean {
         let status = 0;
         let flag: boolean = false;
         switch (port) {
-            case startbit_touchKeyPort.port1:
+            case dolphin_touchKeyPort.port1:
                 pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
                 status = pins.digitalReadPin(DigitalPin.P1);
                 break;
-            case startbit_touchKeyPort.port2:
+            case dolphin_touchKeyPort.port2:
                 pins.setPull(DigitalPin.P13, PinPullMode.PullUp);
                 status = pins.digitalReadPin(DigitalPin.P13);
                 break;
-            case startbit_touchKeyPort.port3:
+            case dolphin_touchKeyPort.port3:
                 if (P14_ad > 0xA)
                     status = 1
                 else
@@ -1213,13 +1213,13 @@ namespace startbit {
     /**
     * Get the condition of the line follower sensor
     */
-    //% weight=95 blockId=startbit_readLineFollowerStatus blockGap=50 block="Line follower status|port %port|%status"
+    //% weight=95 blockId=dolphin_readLineFollowerStatus blockGap=50 block="Line follower status|port %port|%status"
     //% subcategory=Sensor
-    export function startbit_readLineFollowerStatus(port: startbit_lineFollowPort, status: startbit_lineFollower): boolean {
+    export function dolphin_readLineFollowerStatus(port: dolphin_lineFollowPort, status: dolphin_lineFollower): boolean {
         let s1 = 0;
         let s2 = 0;
         switch (port) {
-            case startbit_lineFollowPort.port1:
+            case dolphin_lineFollowPort.port1:
                 s1 = pins.analogReadPin(AnalogPin.P1);
                 s2 = pins.analogReadPin(AnalogPin.P2);
                 s1 = s1 * 255 / 1023;
@@ -1246,20 +1246,20 @@ namespace startbit {
     /**
      * Get the line follower sensor port ad value
      */
-    //% weight=89 blockId=startbit_lineSensorValue blockGap=50 block="Get line follower sensor|port %port|%sensor|ad value"
+    //% weight=89 blockId=dolphin_lineSensorValue blockGap=50 block="Get line follower sensor|port %port|%sensor|ad value"
     //% subcategory=Sensor
-    export function startbit_lineSensorValue(port: startbit_lineFollowPort, sensor: startbit_LineFollowerSensor): number {
+    export function dolphin_lineSensorValue(port: dolphin_lineFollowPort, sensor: dolphin_LineFollowerSensor): number {
         let s1 = 0;
         let s2 = 0;
         switch (port) {
-            case startbit_lineFollowPort.port1:
+            case dolphin_lineFollowPort.port1:
                 s1 = pins.analogReadPin(AnalogPin.P1);
                 s2 = pins.analogReadPin(AnalogPin.P2);
                 s1 = s1 * 255 / 1023;
                 s2 = s2 * 255 / 1023;
                 break;
         }
-        if (sensor == startbit_LineFollowerSensor.LFSensor_1) {
+        if (sensor == dolphin_LineFollowerSensor.LFSensor_1) {
             return 255 - s1;
         }
         else {
@@ -1270,20 +1270,20 @@ namespace startbit {
     /**
     * Get the condition of the touch button,press return 1,or return 0
     */
-    //% weight=99 blockId=startbit_touchButton block="Touch button|port %port|is pressed"    
+    //% weight=99 blockId=dolphin_touchButton block="Touch button|port %port|is pressed"    
     //% subcategory=Sensor
-    export function startbit_touchButton(port: startbit_touchKeyPort): boolean {
+    export function dolphin_touchButton(port: dolphin_touchKeyPort): boolean {
         let status: boolean = false;
         switch (port) {
-            case startbit_touchKeyPort.port1:
+            case dolphin_touchKeyPort.port1:
                 pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
                 status = !pins.digitalReadPin(DigitalPin.P1);
                 break;
-            case startbit_touchKeyPort.port2:
+            case dolphin_touchKeyPort.port2:
                 pins.setPull(DigitalPin.P13, PinPullMode.PullUp);
                 status = !pins.digitalReadPin(DigitalPin.P13);
                 break;
-            case startbit_touchKeyPort.port3:
+            case dolphin_touchKeyPort.port3:
                 if (P14_ad > 0xA)
                     status = false;
                 else
@@ -1297,17 +1297,17 @@ namespace startbit {
     /**
      * Get the distance of ultrasonic detection to the obstacle 
      */
-    //% weight=90 blockId=startbit_ultrasonic  block="Ultrasonic|port %port|distance(cm)"
+    //% weight=90 blockId=dolphin_ultrasonic  block="Ultrasonic|port %port|distance(cm)"
     //% subcategory=Sensor
-    export function startbit_ultrasonic(port: startbit_ultrasonicPort): number {
+    export function dolphin_ultrasonic(port: dolphin_ultrasonicPort): number {
         let echoPin: DigitalPin;
         let trigPin: DigitalPin;
         switch (port) {
-            case startbit_ultrasonicPort.port1:
+            case dolphin_ultrasonicPort.port1:
                 echoPin = DigitalPin.P2;
                 trigPin = DigitalPin.P1;
                 break;
-            case startbit_ultrasonicPort.port2:
+            case dolphin_ultrasonicPort.port2:
                 echoPin = DigitalPin.P14;
                 trigPin = DigitalPin.P13;
                 break;
@@ -1334,9 +1334,9 @@ namespace startbit {
     /**
     * Get the ad value of the knob moudule
     */
-    //% weight=92 blockId=startbit_getKnobValue  block="Get knob|port %port|value(0~255)"
+    //% weight=92 blockId=dolphin_getKnobValue  block="Get knob|port %port|value(0~255)"
     //% subcategory=Sensor
-    export function startbit_getKnobValue(port: startbit_knobPort): number {
+    export function dolphin_getKnobValue(port: dolphin_knobPort): number {
         let adValue = pins.analogReadPin(AnalogPin.P1);
         adValue = adValue * 255 / 1023;
         return adValue;
@@ -1345,9 +1345,9 @@ namespace startbit {
     /**
     * Get the ad value of the photosensitive moudule
     */
-    //% weight=91 blockId=startbit_getphotosensitiveValue  block="Get Photosensitive|port %port|value(0~255)"
+    //% weight=91 blockId=dolphin_getphotosensitiveValue  block="Get Photosensitive|port %port|value(0~255)"
     //% subcategory=Sensor
-    export function startbit_getphotosensitiveValue(port: startbit_photosensitivePort): number {
+    export function dolphin_getphotosensitiveValue(port: dolphin_photosensitivePort): number {
         let adValue = pins.analogReadPin(AnalogPin.P1);
         adValue = adValue * 255 / 1023;
         return 255 - adValue;
@@ -1356,13 +1356,13 @@ namespace startbit {
     /**
     * Get the Photosensitive sensor status,1 detect bright,0 no detect bright
     */
-    //% weight=98 blockId=startbit_photosensitiveSensor block="Photosensitive sensor|port %port|detect bright"
+    //% weight=98 blockId=dolphin_photosensitiveSensor block="Photosensitive sensor|port %port|detect bright"
     //% subcategory=Sensor
-    export function startbit_photosensitiveSensor(port: startbit_PhotosensitiveSensor): boolean {
+    export function dolphin_photosensitiveSensor(port: dolphin_PhotosensitiveSensor): boolean {
         let status = 0;
         let flag: boolean = false;
         switch (port) {
-            case startbit_PhotosensitiveSensor.port1:
+            case dolphin_PhotosensitiveSensor.port1:
                 pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
                 status = pins.digitalReadPin(DigitalPin.P2);
                 break;
@@ -1374,33 +1374,33 @@ namespace startbit {
         return flag;
     }
 	
-    //% blockId="startbit_initRGBLight" block="Initialize RGB led"
+    //% blockId="dolphin_initRGBLight" block="Initialize RGB led"
     //% weight=100
     //% subcategory=LED
-    export function startbit_initRGBLight() {
+    export function dolphin_initRGBLight() {
         if (!lhRGBLight) {
             lhRGBLight = StartbitRGBLight.create(DigitalPin.P15, 6, StartbitRGBPixelMode.RGB);
         }
-        startbit_clearLight();
+        dolphin_clearLight();
     }
 
     /**
          * Set the brightness of the strip. This flag only applies to future operation.
          * @param brightness a measure of LED brightness in 0-255. eg: 255
     */
-    //% blockId="startbit_setBrightness" block="set brightness %brightness"
+    //% blockId="dolphin_setBrightness" block="set brightness %brightness"
     //% weight=99
     //% subcategory=LED
-    export function startbit_setBrightness(brightness: number): void {
+    export function dolphin_setBrightness(brightness: number): void {
         lhRGBLight.setBrightness(brightness);
     }
 
     /**
      * Set the color of the colored lights, after finished the setting please perform  the display of colored lights.
      */
-    //% weight=98 blockId=startbit_setPixelRGB block="Set|%lightoffset|color to %rgb"
+    //% weight=98 blockId=dolphin_setPixelRGB block="Set|%lightoffset|color to %rgb"
     //% subcategory=LED
-    export function startbit_setPixelRGB(lightoffset: StartbitLights, rgb: StartbitRGBColors) {
+    export function dolphin_setPixelRGB(lightoffset: StartbitLights, rgb: StartbitRGBColors) {
         lhRGBLight.setPixelColor(lightoffset, rgb);
     }
 
@@ -1408,9 +1408,9 @@ namespace startbit {
     /**
      * Set RGB Color argument
      */
-    //% weight=97 blockId=startbit_setPixelRGBArgs block="Set|%lightoffset|color to %rgb"
+    //% weight=97 blockId=dolphin_setPixelRGBArgs block="Set|%lightoffset|color to %rgb"
     //% subcategory=LED
-    export function startbit_setPixelRGBArgs(lightoffset: StartbitLights, rgb: number) {
+    export function dolphin_setPixelRGBArgs(lightoffset: StartbitLights, rgb: number) {
         lhRGBLight.setPixelColor(lightoffset, rgb);
     }
 
@@ -1418,66 +1418,66 @@ namespace startbit {
     /**
      * Display the colored lights, and set the color of the colored lights to match the use. After setting the color of the colored lights, the color of the lights must be displayed.
      */
-    //% weight=96 blockId=startbit_showLight block="Show light"
+    //% weight=96 blockId=dolphin_showLight block="Show light"
     //% subcategory=LED
-    export function startbit_showLight() {
+    export function dolphin_showLight() {
         lhRGBLight.show();
     }
 
     /**
      * Clear the color of the colored lights and turn off the lights.
      */
-    //% weight=95 blockGap=50 blockId=startbit_clearLight block="Clear light"
+    //% weight=95 blockGap=50 blockId=dolphin_clearLight block="Clear light"
     //% subcategory=LED
-    export function startbit_clearLight() {
+    export function dolphin_clearLight() {
         lhRGBLight.clear();
     }
 
     /**
 	 * Initialize Light belt
 	 */
-    //% weight=94 blockId=startbit_belt_initRGBLight block="Initialize light belt at port %port"
-    export function startbit_belt_initRGBLight(port: startbit_ultrasonicPort) {
+    //% weight=94 blockId=dolphin_belt_initRGBLight block="Initialize light belt at port %port"
+    export function dolphin_belt_initRGBLight(port: dolphin_ultrasonicPort) {
         switch (port) {
-            case startbit_ultrasonicPort.port1:
+            case dolphin_ultrasonicPort.port1:
                 if (!lhRGBLightBelt) {
                     lhRGBLightBelt = StartbitRGBLight.create(DigitalPin.P1, 15, StartbitRGBPixelMode.RGB);
                 }
                 break;
-            case startbit_ultrasonicPort.port2:
+            case dolphin_ultrasonicPort.port2:
                 if (!lhRGBLightBelt) {
                     lhRGBLightBelt = StartbitRGBLight.create(DigitalPin.P13, 15, StartbitRGBPixelMode.RGB);
                 }
                 break;
         }
 
-        startbit_clearLight();
+        dolphin_clearLight();
     }
 
     /**
      * Set the color of the colored lights, after finished the setting please perform  the display of colored lights.
      */
-    //% weight=93 blockId=startbit_belt_setPixelRGB block="Set light belt|%lightoffset|color to %rgb"
+    //% weight=93 blockId=dolphin_belt_setPixelRGB block="Set light belt|%lightoffset|color to %rgb"
     //% subcategory=LED
-    export function startbit_belt_setPixelRGB(lightoffset: StartbitLightsBelt, rgb: StartbitRGBColors) {
+    export function dolphin_belt_setPixelRGB(lightoffset: StartbitLightsBelt, rgb: StartbitRGBColors) {
         lhRGBLightBelt.setPixelColor(lightoffset, rgb);
     }
 
     /**
      * Display the colored lights, and set the color of the colored lights to match the use. After setting the color of the colored lights, the color of the lights must be displayed.
      */
-    //% weight=92 blockId=startbit_belt_showLight block="Show light belt"
+    //% weight=92 blockId=dolphin_belt_showLight block="Show light belt"
     //% subcategory=LED
-    export function startbit_belt_showLight() {
+    export function dolphin_belt_showLight() {
         lhRGBLightBelt.show();
     }
 
     /**
      * Clear the color of the colored lights and turn off the lights.
      */
-    //% weight=91 blockGap=50 blockId=startbit_belt_clearLight block="Clear light belt"
+    //% weight=91 blockGap=50 blockId=dolphin_belt_clearLight block="Clear light belt"
     //% subcategory=LED
-    export function startbit_belt_clearLight() {
+    export function dolphin_belt_clearLight() {
         lhRGBLightBelt.clear();
     }
 
@@ -1488,40 +1488,40 @@ namespace startbit {
     /**
     * Resolve the Bluetooth that phone APP send command type, the total of nine types of commands: tank display command, servo debug command, obtaining the distance of ultrasonic command, obtaining temperature command, obtain sound size rank orders, to obtain the light level command, set the color lights command, honking command, firmware version information command.
     */
-    //% weight=99 blockId=startbit_analyzeBluetoothCmd block="Get bluetooth command type %str"
+    //% weight=99 blockId=dolphin_analyzeBluetoothCmd block="Get bluetooth command type %str"
     //% subcategory=Bluetooth
-    export function startbit_analyzeBluetoothCmd(str: string): number {
+    export function dolphin_analyzeBluetoothCmd(str: string): number {
         if (str.length > 6) {
             let cmdHead = str.substr(0, 3);
 
             if (cmdHead == "CMD") {
                 let cmdTypeStr: string = str.substr(4, 2);
                 let cmdType = strToNumber(cmdTypeStr);
-                if (cmdType > startbit_CmdType.GET_HAND_CMD || cmdType < 0) {
-                    return startbit_CmdType.NO_COMMAND;
+                if (cmdType > dolphin_CmdType.GET_HAND_CMD || cmdType < 0) {
+                    return dolphin_CmdType.NO_COMMAND;
                 }
                 else {
                     return cmdType;
                 }
             }
             else {
-                return startbit_CmdType.NO_COMMAND;
+                return dolphin_CmdType.NO_COMMAND;
             }
         }
         else {
-            return startbit_CmdType.NO_COMMAND;
+            return dolphin_CmdType.NO_COMMAND;
         }
     }
     /**
      * Resolve the parameters that the phone APP send the command,there are 3 parameters of servo debug command,the other command has just one parameter.
      */
-    //% weight=98  blockId=startbit_cgetArgs block="Get bluetooth command|%str|argument at %index"
+    //% weight=98  blockId=dolphin_cgetArgs block="Get bluetooth command|%str|argument at %index"
     //% index.min=1 index.max=3
     //% subcategory=Bluetooth
-    export function startbit_getArgs(str: string, index: number): number {
-        let cmdType = startbit_analyzeBluetoothCmd(str);
-        if (cmdType == startbit_CmdType.NO_COMMAND) {
-            return startbit_CarRunCmdType.COMMAND_ERRO;
+    export function dolphin_getArgs(str: string, index: number): number {
+        let cmdType = dolphin_analyzeBluetoothCmd(str);
+        if (cmdType == dolphin_CmdType.NO_COMMAND) {
+            return dolphin_CarRunCmdType.COMMAND_ERRO;
         }
         else {
             let dataIndex = 7;
@@ -1534,9 +1534,9 @@ namespace startbit {
                 dataIndex = 13;
                 subLegth = 4;
             }
-            if (cmdType == startbit_CmdType.SERVO) {
+            if (cmdType == dolphin_CmdType.SERVO) {
                 if (str.length < 17) {
-                    return startbit_CmdType.NO_COMMAND;
+                    return dolphin_CmdType.NO_COMMAND;
                 }
             }
             if ((index == 1 && str.length < 10) || (index == 2 && str.length < 13) || (index == 3 && str.length < 17)) {
@@ -1553,27 +1553,27 @@ namespace startbit {
     /**
      * Returns the enumeration of the command type, which can be compared with this module after obtaining the bluetooth command type sent by the mobile phone APP.
      */
-    //% weight=97 blockId=startbit_getBluetoothCmdtype block="Bluetooth command type %type"
+    //% weight=97 blockId=dolphin_getBluetoothCmdtype block="Bluetooth command type %type"
     //% subcategory=Bluetooth
-    export function startbit_getBluetoothCmdtype(type: startbit_CmdType): number {
+    export function dolphin_getBluetoothCmdtype(type: dolphin_CmdType): number {
         return type;
     }
 
     /**
      * The command type of the tank is stop, go ahead, back, turn left, turn right, slow down, turn left slowly, turn right slowly.
      */
-    //% weight=96 blockId=startbit_getRunCarType block="Car run type %type"
+    //% weight=96 blockId=dolphin_getRunCarType block="Car run type %type"
     //% subcategory=Bluetooth
-    export function startbit_getRunCarType(type: startbit_CarRunCmdType): number {
+    export function dolphin_getRunCarType(type: dolphin_CarRunCmdType): number {
         return type;
     }
 
     /**
      * The distance from the ultrasonic obstacle is the standard command, which is sent to the mobile phone. The APP will indicate the distance of the ultrasonic obstacle.
      */
-    //% weight=95 blockId=startbit_convertUltrasonic block="Convert ultrasonic distance %data"
+    //% weight=95 blockId=dolphin_convertUltrasonic block="Convert ultrasonic distance %data"
     //% subcategory=Bluetooth
-    export function startbit_convertUltrasonic(data: number): string {
+    export function dolphin_convertUltrasonic(data: number): string {
         let cmdStr: string = "CMD|03|";
         cmdStr += data.toString();
         cmdStr += "|$";
@@ -1583,9 +1583,9 @@ namespace startbit {
     /**
      * The conversion temperature value to standard command, sent to the mobile phone, and the APP displays the current temperature.
      */
-    //% weight=94 blockId=startbit_convertTemperature block="Convert temperature %data"
+    //% weight=94 blockId=dolphin_convertTemperature block="Convert temperature %data"
     //% subcategory=Bluetooth
-    export function startbit_convertTemperature(data: number): string {
+    export function dolphin_convertTemperature(data: number): string {
         let cmdStr: string = "CMD|04|";
         cmdStr += data.toString();
         cmdStr += "|$";
@@ -1595,9 +1595,9 @@ namespace startbit {
     /**
      * Convert the light value to the standard command and send it to the mobile phone. The APP displays the current light level (0~255).
      */
-    //% weight=93 blockId=startbit_convertLight block="Convert light %data"
+    //% weight=93 blockId=dolphin_convertLight block="Convert light %data"
     //% subcategory=Bluetooth
-    export function startbit_convertLight(data: number): string {
+    export function dolphin_convertLight(data: number): string {
         let cmdStr: string = "CMD|06|";
         cmdStr += data.toString();
         cmdStr += "|$";
@@ -1607,9 +1607,9 @@ namespace startbit {
     /**
      * Convert the battery value to the standard command and send it to the mobile phone. The APP displays the current voltage.
      */
-    //% weight=92 blockId=startbit_convertBattery blockGap=50 block="Convert battery %data"
+    //% weight=92 blockId=dolphin_convertBattery blockGap=50 block="Convert battery %data"
     //% subcategory=Bluetooth
-    export function startbit_convertBattery(data: number): string {
+    export function dolphin_convertBattery(data: number): string {
         let cmdStr: string = "CMD|07|";
         cmdStr += data.toString();
         cmdStr += "|$";
@@ -1619,8 +1619,8 @@ namespace startbit {
     /**
      * Convert the hand cmd to phone app
      */
-    //% weight=51 blockId=startbit_convertHandCmd blockGap=50 block="Convert uHand:bit %data"
-    export function startbit_convertHandCmd(data: number): string {
+    //% weight=51 blockId=dolphin_convertHandCmd blockGap=50 block="Convert uHand:bit %data"
+    export function dolphin_convertHandCmd(data: number): string {
         let cmdStr: string = "CMD|15|";
         cmdStr += data.toString();
         cmdStr += "|$";
@@ -1630,9 +1630,9 @@ namespace startbit {
     /**
      * Get device mac address
      */
-    //% weight=100 blockId=startbit_getMacAddress block="Get device id"
+    //% weight=100 blockId=dolphin_getMacAddress block="Get device id"
     //% subcategory=Bluetooth
-    export function startbit_getMacAddress(): string {
+    export function dolphin_getMacAddress(): string {
         return macStr + "$";
     }
 	
@@ -1691,14 +1691,14 @@ namespace startbit {
         return buf[0];
     }
 
-    //% weight=96 blockId=startbit_ASRSETMODE block="Set to |%mode mode"
-    export function startbit_ASRSETMODE(mode: ASRMode) {
+    //% weight=96 blockId=dolphin_ASRSETMODE block="Set to |%mode mode"
+    export function dolphin_ASRSETMODE(mode: ASRMode) {
         WireWriteDataArray(ASR_I2C_ADDR, ASR_MODE_ADDR, mode);
     }
 
-    //% weight=84 blockId=startbit_ASRREAD block="Read Data"
+    //% weight=84 blockId=dolphin_ASRREAD block="Read Data"
     //% subcategory=Sensor
-    export function startbit_ASRREAD(): number {
+    export function dolphin_ASRREAD(): number {
         let val = WireReadDataArray(ASR_I2C_ADDR, ASR_RESULT_ADDR, 1);
         return val;
     }
@@ -1707,9 +1707,9 @@ namespace startbit {
      * @param idNum is a number, eg: 1
      * @param words is text, eg: "ni hao"
      */
-    //% weight=83 blockId=startbit_ASRAddWords block="Add idNum|%idNum words|%words"
+    //% weight=83 blockId=dolphin_ASRAddWords block="Add idNum|%idNum words|%words"
     //% subcategory=Sensor
-    export function startbit_ASRAddWords(idNum: number, words: string) {
+    export function dolphin_ASRAddWords(idNum: number, words: string) {
         let buf = pins.createBuffer(words.length + 2);
         buf[0] = ASR_ADD_WORDS_ADDR;
         buf[1] = idNum;
@@ -1720,9 +1720,9 @@ namespace startbit {
         basic.pause(50);
     }
 
-    //% weight=82 blockId=startbit_ASRWORDSERASE block="Erase Data"
+    //% weight=82 blockId=dolphin_ASRWORDSERASE block="Erase Data"
     //% subcategory=Sensor
-    export function startbit_ASRWORDSERASE() {
+    export function dolphin_ASRWORDSERASE() {
         WireWriteDataArray(ASR_I2C_ADDR, ASR_WORDS_ERASE_ADDR, null);
 	basic.pause(60);
     }
@@ -1737,7 +1737,7 @@ namespace startbit {
     const MP3_SINGLE_LOOP_ON_ADDR = 13;
     const MP3_SINGLE_LOOP_OFF_ADDR = 14;
 
-    export enum startbit_mp3button {
+    export enum dolphin_mp3button {
         //% block="PLAY"
         PLAY = MP3_PLAY_ADDR,
         //% block="PAUSE"
@@ -1748,16 +1748,16 @@ namespace startbit {
         NEXT = MP3_NEXT_ADDR
     }
 
-    export enum startbit_mp3Loop {
+    export enum dolphin_mp3Loop {
         //% block="ON"
         ON = MP3_SINGLE_LOOP_ON_ADDR,
         //% block="OFF"
         OFF = MP3_SINGLE_LOOP_OFF_ADDR
     }
 
-    //% weight=87 blockId=startbit_MP3_BUTTON block="MP3 |%button music"
+    //% weight=87 blockId=dolphin_MP3_BUTTON block="MP3 |%button music"
     //% subcategory=Sensor
-    export function startbit_MP3_BUTTON(button: startbit_mp3button) {
+    export function dolphin_MP3_BUTTON(button: dolphin_mp3button) {
         WireWriteDataArray(MP3_I2C_ADDR, button, null);
         basic.pause(20);
     }
@@ -1765,17 +1765,17 @@ namespace startbit {
     /**
      * @param value is a number, eg: 20
      */
-    //% weight=88 blockId=startbit_MP3_VOL block="MP3 VOL |%value"
+    //% weight=88 blockId=dolphin_MP3_VOL block="MP3 VOL |%value"
     //% subcategory=Sensor
-    export function startbit_MP3_VOL(value: number) {
+    export function dolphin_MP3_VOL(value: number) {
         WireWriteDataArray(MP3_I2C_ADDR, MP3_VOL_VALUE_ADDR, value);
         basic.pause(20);
     }
 
 
-    //% weight=85 blockId=startbit_MP3_SINGLE_LOOP blockGap=50 block="MP3 SINGLE LOOP |%state"
+    //% weight=85 blockId=dolphin_MP3_SINGLE_LOOP blockGap=50 block="MP3 SINGLE LOOP |%state"
     //% subcategory=Sensor
-    export function startbit_MP3_SINGLE_LOOP(state: startbit_mp3Loop) {
+    export function dolphin_MP3_SINGLE_LOOP(state: dolphin_mp3Loop) {
         WireWriteDataArray(MP3_I2C_ADDR, state, null);
         basic.pause(20);
     }
@@ -1783,14 +1783,14 @@ namespace startbit {
     /**
      * @param num is a number, eg: 1
      */
-    //% weight=86 blockId=startbit_MP3_PLAY_NUM block="MP3 PLAY NUM|%num"
+    //% weight=86 blockId=dolphin_MP3_PLAY_NUM block="MP3 PLAY NUM|%num"
     //% subcategory=Sensor
-    export function startbit_MP3_PLAY_NUM(num: number) {
+    export function dolphin_MP3_PLAY_NUM(num: number) {
         WireWriteDataArray(MP3_I2C_ADDR, MP3_PLAY_NUM_ADDR, num);
         basic.pause(20);
     }
 
-    export enum startbit_LineFollowerSensors {
+    export enum dolphin_LineFollowerSensors {
         //% block="S1"
         S1,
         //% block="S2"
@@ -1801,7 +1801,7 @@ namespace startbit {
         S4
     }
 
-    export enum startbit_LineColor {
+    export enum dolphin_LineColor {
         //% block="Black"
         Black,
         //% block="White"
@@ -1810,61 +1810,61 @@ namespace startbit {
 
     const LINE_FOLLOWER_I2C_ADDR = 0x78   
     
-    //% weight=96 blockId=startbit_line_followers block="Line follower %lineFollowerSensor in %LineColor ?"
+    //% weight=96 blockId=dolphin_line_followers block="Line follower %lineFollowerSensor in %LineColor ?"
     //% inlineInputMode=inline
     //% subcategory=Sensor
-    export function startbit_line_followers(lineFollowerSensor: startbit_LineFollowerSensors, LineColor: startbit_LineColor): boolean {
+    export function dolphin_line_followers(lineFollowerSensor: dolphin_LineFollowerSensors, LineColor: dolphin_LineColor): boolean {
         pins.i2cWriteNumber(LINE_FOLLOWER_I2C_ADDR, 1, NumberFormat.UInt8BE);	    
 	let data = pins.i2cReadNumber(LINE_FOLLOWER_I2C_ADDR, NumberFormat.UInt8BE);
         let status = false;
         switch (lineFollowerSensor) {
-            case startbit_LineFollowerSensors.S1:
+            case dolphin_LineFollowerSensors.S1:
                 if (data & 0x01) {
-                    if (LineColor == startbit_LineColor.Black) {
+                    if (LineColor == dolphin_LineColor.Black) {
                         status = true;
                     }
                 }
                 else {
-                    if (LineColor == startbit_LineColor.White) {
+                    if (LineColor == dolphin_LineColor.White) {
                         status = true;
                     }
                 }
                 break;
 
-            case startbit_LineFollowerSensors.S2:
+            case dolphin_LineFollowerSensors.S2:
                 if (data & 0x02) {
-                    if (LineColor == startbit_LineColor.Black) {
+                    if (LineColor == dolphin_LineColor.Black) {
                         status = true;
                     }
                 }
                 else {
-                    if (LineColor == startbit_LineColor.White) {
+                    if (LineColor == dolphin_LineColor.White) {
                         status = true;
                     }
                 }
                 break;
 
-            case startbit_LineFollowerSensors.S3:
+            case dolphin_LineFollowerSensors.S3:
                 if (data & 0x04) {
-                    if (LineColor == startbit_LineColor.Black) {
+                    if (LineColor == dolphin_LineColor.Black) {
                         status = true;
                     }
                 }
                 else {
-                    if (LineColor == startbit_LineColor.White) {
+                    if (LineColor == dolphin_LineColor.White) {
                         status = true;
                     }
                 }
                 break;
 
-            case startbit_LineFollowerSensors.S4:
+            case dolphin_LineFollowerSensors.S4:
                 if (data & 0x08) {
-                    if (LineColor == startbit_LineColor.Black) {
+                    if (LineColor == dolphin_LineColor.Black) {
                         status = true;
                     }
                 }
                 else {
-                    if (LineColor == startbit_LineColor.White) {
+                    if (LineColor == dolphin_LineColor.White) {
                         status = true;
                     }
                 }
