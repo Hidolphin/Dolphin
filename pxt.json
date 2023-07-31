@@ -11,8 +11,8 @@
         "main.ts",
         "StartbitRGBLight.ts",
         "sendbuffer.asm",
-        "_locales/zh/startbit-strings.json",
-        "_locales/zh/startbit-jsdoc-strings.json"
+        "_locales/zh/Dolphin-strings.json",
+        "_locales/zh/Dolphin-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"
