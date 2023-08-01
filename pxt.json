@@ -1,7 +1,7 @@
 {
-    "name": "dolphin",
+    "name": "Dolphin",
     "version": "0.0.1",
-    "description": "Blocks for Hichuxin dolphin",
+    "description": "Blocks for Hidolphin",
     "license": "MIT",
     "dependencies": {
         "core": "*"
