@@ -1,16 +1,16 @@
-# Dolphin
+# Hidolphin
 
-Blocks for Hichuxin dolphin
+Blocks for Hidolphin
 ## License
 
 MIT
 
 ## Supported targets
 
-* for PXT/dolphin
+* for PXT/Hidolphin
 (The metadata above is needed for package search.)
 
 ```package
-dolphin=github:dolphinchuxin/Hidolphin
+Hidolphin=github:dolphinchuxin/Hidolphin
 ```
 
