@@ -1,8 +1,8 @@
 /*
- dolphin package
+ Dolphin package
 */
 //% weight=10 icon="\uf013" color=#2896ff
-namespace dolphin {
+namespace Dolphin {
 
     export enum startbit_Colors {
         //% block="Red"
@@ -180,7 +180,7 @@ namespace dolphin {
     /**
      * Startbit initialization, please execute at boot time
     */
-    //% weight=100 blockId=startbit_Init block="Initialize dolphin"
+    //% weight=100 blockId=startbit_Init block="Initialize Dolphin"
     export function startbit_Init() {
         startbit_initRGBLight();
         serial.redirect(
