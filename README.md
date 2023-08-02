@@ -11,6 +11,6 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-dolphin=github:dolphinchuxin/Hidolphin
+Dolphin=github:dolphinchuxin/Hidolphin
 ```
 
