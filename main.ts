@@ -19,7 +19,7 @@ namespace Dolphin {
         None = 0x06
     }
 
-    export enum startbit_lineFollower {
+    export enum t_lineFollower {
         //% blockId="S1_OUT_S2_OUT" block="Sensor1 and sensor2 are out black line"
         S1_OUT_S2_OUT = 0x00,
         //% blockId="S1_OUT_S2_IN" block="Sensor2 in black line but sensor1 not"
@@ -178,7 +178,7 @@ namespace Dolphin {
     }
 
     /**
-     * Startbit initialization, please execute at boot time
+     * Dolphin initialization, please execute at boot time
     */
     //% weight=100 blockId=startbit_Init block="Initialize Dolphin"
     export function startbit_Init() {
@@ -471,7 +471,7 @@ namespace Dolphin {
 
 	
     /**
-     * Send read startbit servos angle command
+     * Send read Dolphin servos angle command
      */
     //% weight=99 blockId=startbit_readAngle block="Send |%servo|angle command "
     //% subcategory=Servo
@@ -488,10 +488,10 @@ namespace Dolphin {
 
 
     /**
-     * Do someting when Startbit receive angle
+     * Do someting when Dolphin receive angle
      * @param body code to run when event is raised
      */
-    //% weight=97 blockId=onStartbit_getAngle blockGap=50 block="on Startbit|%servo|get angle"
+    //% weight=97 blockId=onStartbit_getAngle blockGap=50 block="on Dolphin|%servo|get angle"
     //% subcategory=Servo
     export function onStartbit_getAngle(servo: startbit_Servos, body: Action) {
         control.onEvent(MESSAGE_ANGLE, servo, body);
@@ -603,9 +603,9 @@ namespace Dolphin {
     }
 
     /**
-     *  Get startbit current voltage,the unit is mV
+     *  Get Dolphin current voltage,the unit is mV
     */
-    //% weight=93 blockGap=50 blockId=startbit_getBatVoltage block="Get startbit current voltage (mV)"
+    //% weight=93 blockGap=50 blockId=startbit_getBatVoltage block="Get Dolphin current voltage (mV)"
     //% subcategory=Sensor
     export function startbit_getBatVoltage(): number {
         return currentVoltage;
